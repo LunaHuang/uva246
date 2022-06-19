@@ -1,4 +1,5 @@
 # uva246 - 10-20-30
+https://onlinejudge.org/external/2/246.pdf
 
 A simple solitaire card game called 10-20-30 uses a standard deck of 52 playing cards in which suit is
 irrelevant. The value of a face card (king, queen, jack) is 10. The value of an ace is one. The value of
