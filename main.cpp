@@ -5,6 +5,7 @@
 #include <set>
 #include <sstream>
 #include <vector>
+#include <array>
 
 #if defined(WITH_GTEST)
 #include <gtest/gtest.h>
