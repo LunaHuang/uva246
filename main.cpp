@@ -1,11 +1,11 @@
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <iostream>
 #include <queue>
 #include <set>
 #include <sstream>
 #include <vector>
-#include <array>
 
 #if defined(WITH_GTEST)
 #include <gtest/gtest.h>
@@ -21,7 +21,7 @@ class Poker {
 public:
   // methods
 public:
-  void init_piles(std::string &input);
+  void init_piles(std::vector<int>);
   std::string game_play(void);
   void show();
 
@@ -85,7 +85,7 @@ void Poker::pick_up_check(int order) {
   }
 }
 
-void Poker::init_piles(std::string &input) {
+void Poker::init_piles(std::vector<int> input) {
   // clear private data
   play_count = 0;
   pile_set_.clear();
@@ -93,11 +93,8 @@ void Poker::init_piles(std::string &input) {
   for (int i = 0; i < TotalPilesNum; i++)
     piles_[i].clear();
 
-  // init private data
-  std::stringstream ss(input);
-  std::string token;
-  while (std::getline(ss, token, ' ')) {
-    int num = stoi(token);
+  for (int i = 0; i < PokerMax; i++) {
+    int num = input[i];
     if (play_count < TotalPilesNum) {
       piles_[play_count].push_back(num);
       play_count++;
@@ -157,13 +154,20 @@ void Poker::show(void) {
 }
 
 void solve_uva_problem(std::istream &is, std::ostream &os) {
+
   Poker poker;
   while (1) {
-    std::string input;
-    std::getline(is, input);
-    if (input.compare("0") == 0)
-      break;
-    poker.init_piles(input);
+    std::vector<int> deck;
+    int count = 0;
+    while (count != PokerMax) {
+      int num;
+      is >> num;
+      if (num == 0)
+        return;
+      deck.push_back(num);
+      count++;
+    }
+    poker.init_piles(deck);
     os << poker.game_play() << std::endl;
   }
 }
